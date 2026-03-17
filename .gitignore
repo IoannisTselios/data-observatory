@@ -1,0 +1,18 @@
+# Environment variables (NEVER commit passwords)
+.env
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.python-version
+
+# Data files (can be large)
+data/raw/*
+data/staging/*
+
+# dbt
+dbt/target/
+dbt/logs/
+dbt/.user.yml
