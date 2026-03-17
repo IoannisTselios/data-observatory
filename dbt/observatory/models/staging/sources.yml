@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    tables:
+      - name: ckan_cph_raw
+        description: "Raw Copenhagen traffic counts from CKAN API"
