@@ -1,69 +1,189 @@
+.home-shell {
+  width: 100%;
+  min-height: 100vh;
+  padding: 0;
+}
+
 .home-page {
+  position: relative;
   display: grid;
-  gap: var(--space-6);
-}
-
-.hero-panel {
-  padding: var(--space-7) var(--space-6);
-}
-
-.hero-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-4);
+  place-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: var(--space-5);
 }
 
 .home-title {
   margin: 0;
-  max-width: 10ch;
-  font-size: clamp(3rem, 8vw, 5.25rem);
-  line-height: 0.96;
+  max-width: 12ch;
+  color: var(--color-heading);
+  font-size: clamp(3.5rem, 9vw, 6.5rem);
+  line-height: 0.92;
+  text-align: center;
+  text-wrap: balance;
 }
 
 .hero-copy {
-  max-width: 34rem;
+  max-width: 40rem;
+  margin-bottom: 0;
   margin-top: var(--space-4);
-  font-size: 1.05rem;
+  color: var(--color-text-soft);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  text-align: center;
 }
 
 .hero-actions {
   display: flex;
-  gap: var(--space-3);
   margin-top: var(--space-5);
 }
 
-.support-panel {
-  width: min(100%, 760px);
-  padding-top: var(--space-5);
-  padding-bottom: var(--space-5);
+.home-page > .theme-toggle {
+  position: absolute;
+  top: var(--space-5);
+  right: var(--space-5);
+  z-index: 4;
 }
 
-@media (max-width: 860px) {
-  .hero-header {
-    flex-direction: column;
-  }
+.home-hero-content {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  justify-items: center;
+  width: min(100%, 46rem);
+  padding: var(--space-7) var(--space-5);
+}
 
-  .hero-panel {
-    padding: var(--space-6);
+.home-visual,
+.home-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.home-overlay {
+  z-index: 2;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(244, 240, 232, 0.7) 0%,
+      rgba(244, 240, 232, 0.84) 50%,
+      rgba(244, 240, 232, 0.92) 100%
+    );
+}
+
+:root[data-theme='dark'] .home-overlay {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(24, 26, 29, 0.7) 0%,
+      rgba(24, 26, 29, 0.82) 50%,
+      rgba(24, 26, 29, 0.9) 100%
+    );
+}
+
+.home-visual {
+  z-index: 1;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(31, 122, 120, 0.12), transparent 20%),
+    radial-gradient(circle at 78% 26%, rgba(31, 122, 120, 0.09), transparent 24%),
+    radial-gradient(circle at 50% 70%, rgba(31, 122, 120, 0.08), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent);
+}
+
+:root[data-theme='dark'] .home-visual {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(76, 167, 163, 0.14), transparent 20%),
+    radial-gradient(circle at 78% 26%, rgba(76, 167, 163, 0.12), transparent 24%),
+    radial-gradient(circle at 50% 70%, rgba(76, 167, 163, 0.1), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+}
+
+.home-visual-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(10px);
+  opacity: 0.6;
+  animation: drift 20s ease-in-out infinite;
+}
+
+.home-visual-orb-one {
+  top: 14%;
+  left: 10%;
+  width: min(28rem, 45vw);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(31, 122, 120, 0.18), transparent 68%);
+}
+
+.home-visual-orb-two {
+  right: 8%;
+  bottom: 10%;
+  width: min(24rem, 38vw);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(31, 122, 120, 0.14), transparent 70%);
+  animation-duration: 24s;
+  animation-direction: reverse;
+}
+
+:root[data-theme='dark'] .home-visual-orb-one {
+  background: radial-gradient(circle, rgba(76, 167, 163, 0.2), transparent 68%);
+}
+
+:root[data-theme='dark'] .home-visual-orb-two {
+  background: radial-gradient(circle, rgba(76, 167, 163, 0.16), transparent 70%);
+}
+
+.home-visual-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(31, 122, 120, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31, 122, 120, 0.06) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+  mask-image: radial-gradient(circle at center, black, transparent 78%);
+  opacity: 0.6;
+}
+
+:root[data-theme='dark'] .home-visual-grid {
+  background-image:
+    linear-gradient(rgba(76, 167, 163, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(76, 167, 163, 0.08) 1px, transparent 1px);
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(1.5rem, -1rem, 0) scale(1.04);
   }
 }
 
 @media (max-width: 640px) {
   .home-page {
-    gap: var(--space-5);
+    padding: var(--space-4);
   }
 
   .home-title {
-    max-width: none;
-    font-size: clamp(2.5rem, 14vw, 4rem);
+    max-width: 9ch;
+    font-size: clamp(2.9rem, 16vw, 4.5rem);
   }
 
+  .home-page > .theme-toggle {
+    top: var(--space-4);
+    right: var(--space-4);
+  }
+
+  .home-hero-content {
+    width: min(100%, 30rem);
+    padding: var(--space-8) var(--space-4) var(--space-6);
+  }
+
+  .hero-actions,
   .hero-actions .button {
     width: 100%;
   }
 
-  .support-panel {
-    width: 100%;
+  .home-visual-grid {
+    background-size: 3rem 3rem;
   }
 }

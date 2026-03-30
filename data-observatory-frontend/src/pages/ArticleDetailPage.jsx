@@ -23,14 +23,8 @@ function ArticleDetailPage() {
 
   return (
     <article className="article-page-shell">
-      <Link className="article-back-link" to="/articles">
-        Back to articles
-      </Link>
-
       <header className="article-header">
-        <p className="eyebrow">{article.category}</p>
         <h2 className="article-title">{article.title}</h2>
-        <p className="article-intro">{article.shortDescription}</p>
         <p className="article-meta">{article.category} · {article.date}</p>
       </header>
 
@@ -42,10 +36,15 @@ function ArticleDetailPage() {
       </section>
 
       <section className="article-body">
+        <p className="article-intro">{article.shortDescription}</p>
         {article.body.map((paragraph, index) => (
           <p key={`${article.id}-${index}`}>{paragraph}</p>
         ))}
       </section>
+
+      <Link className="article-back-link" to="/articles">
+        Back to articles
+      </Link>
     </article>
   )
 }

@@ -6,19 +6,22 @@ function HomePage({ theme, onToggleTheme }) {
   return (
     <main className="home-shell">
       <section className="home-page">
-        <div className="hero-panel">
-          <div className="hero-header">
-            <div>
-              <p className="eyebrow">Data Observatory</p>
-              <h1 className="home-title">Data Observatory</h1>
-              <p className="hero-copy">
-                A calm editorial space for stories, notes, and public-facing
-                data publishing.
-              </p>
-            </div>
+        <ThemeToggle theme={theme} onToggleTheme={onToggleTheme} />
 
-            <ThemeToggle theme={theme} onToggleTheme={onToggleTheme} />
-          </div>
+        <div className="home-visual" aria-hidden="true">
+          <div className="home-visual-orb home-visual-orb-one" />
+          <div className="home-visual-orb home-visual-orb-two" />
+          <div className="home-visual-grid" />
+        </div>
+
+        <div className="home-overlay" aria-hidden="true" />
+
+        <div className="home-hero-content">
+          <h1 className="home-title">Data Observatory</h1>
+          <p className="hero-copy">
+            A calm editorial space for stories, notes, and public-facing data
+            publishing.
+          </p>
 
           <div className="hero-actions">
             <Link className="button primary" to="/articles">
@@ -26,15 +29,6 @@ function HomePage({ theme, onToggleTheme }) {
             </Link>
           </div>
         </div>
-
-        <section className="support-panel content-panel">
-          <p className="eyebrow">Inside</p>
-          <h2>Thoughtful reporting with a clear reading experience.</h2>
-          <p>
-            Explore articles, project notes, and supporting context in a clean,
-            focused interface designed for reading.
-          </p>
-        </section>
       </section>
     </main>
   )
