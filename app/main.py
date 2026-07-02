@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routers import traffic
+from app.routers import datasets, traffic
 from contextlib import asynccontextmanager
 
 @asynccontextmanager
@@ -18,6 +18,7 @@ app = FastAPI(
 )
 
 app.include_router(traffic.router, prefix="/api", tags=["traffic"])
+app.include_router(datasets.router, prefix="/api", tags=["datasets"])
 
 @app.get("/")
 async def root():
