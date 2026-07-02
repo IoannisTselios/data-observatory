@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Layout from './components/Layout.jsx'
 import HomePage from './pages/HomePage.jsx'
+import DatasetsPage from './pages/DatasetsPage.jsx'
+import DatasetDetailPage from './pages/DatasetDetailPage.jsx'
 import ArticlesPage from './pages/ArticlesPage.jsx'
 import ArticleDetailPage from './pages/ArticleDetailPage.jsx'
 import AboutPage from './pages/AboutPage.jsx'
@@ -45,6 +47,8 @@ function App() {
         <Route
           element={<Layout theme={theme} onToggleTheme={handleToggleTheme} />}
         >
+          <Route path="/datasets" element={<DatasetsPage />} />
+          <Route path="/datasets/:slug" element={<DatasetDetailPage />} />
           <Route path="/articles" element={<ArticlesPage />} />
           <Route path="/articles/:slug" element={<ArticleDetailPage />} />
           <Route path="/about" element={<AboutPage />} />
