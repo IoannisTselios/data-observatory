@@ -12,6 +12,68 @@ function DetailRow({ label, value }) {
   )
 }
 
+function getStatusDescription(dataset) {
+  if (dataset.ingestion_status === 'transformed') {
+    return 'This dataset is already stored internally and prepared through dbt, so it is the easiest version to build analysis on top of.'
+  }
+
+  if (dataset.ingestion_status === 'ingest_planned') {
+    return 'This dataset is already selected for the next ingestion batch, but it is not fully prepared inside the observatory yet.'
+  }
+
+  if (dataset.ingestion_status === 'registered') {
+    return 'This dataset is cataloged in the library, but it is still mainly a source record rather than an internal analysis-ready asset.'
+  }
+
+  return 'This dataset is present in the catalog, but its internal processing stage is still evolving.'
+}
+
+function getAccessNotes(dataset) {
+  if (dataset.storage_status === 'stored_internal') {
+    return [
+      'Use the public source page if you want to inspect the original publishing context.',
+      'Use the internal analytics table if you want the cleaned version prepared inside Data Observatory.',
+      'A local notebook or Python script is the simplest way to start exploring it today.',
+    ]
+  }
+
+  return [
+    'The public source page is currently the main access point for this dataset.',
+    'The dataset is not yet stored internally, so the external source is still the best place to download or inspect it.',
+    'The library entry exists now so the dataset can move into a fuller ingest and analysis workflow later.',
+  ]
+}
+
+function getPythonSnippet(dataset) {
+  if (dataset.storage_status === 'stored_internal' && dataset.mart_model_name) {
+    return [
+      'import pandas as pd',
+      'from sqlalchemy import create_engine',
+      '',
+      "engine = create_engine('postgresql://postgres:changeme123@localhost/observatory')",
+      `df = pd.read_sql('SELECT * FROM ${dataset.mart_model_name} LIMIT 1000', engine)`,
+      'print(df.head())',
+    ].join('\n')
+  }
+
+  return [
+    'import pandas as pd',
+    '',
+    `source_url = '${dataset.source_url}'`,
+    '# Open the source page, download the dataset, and load the file locally.',
+    "df = pd.read_csv('path/to/downloaded-file.csv')",
+    'print(df.head())',
+  ].join('\n')
+}
+
+function getSqlSnippet(dataset) {
+  if (dataset.storage_status === 'stored_internal' && dataset.mart_model_name) {
+    return `SELECT *\nFROM ${dataset.mart_model_name}\nLIMIT 25;`
+  }
+
+  return '-- Internal SQL is not available yet for this dataset.\n-- Use the external source page first.'
+}
+
 function DatasetDetailPage() {
   const { slug } = useParams()
   const [dataset, setDataset] = useState(null)
@@ -119,9 +181,76 @@ function DatasetDetailPage() {
         </section>
       </div>
 
+      <section className="dataset-status-panel">
+        <h3>What this means right now</h3>
+        <p>{getStatusDescription(dataset)}</p>
+      </section>
+
       <section className="dataset-notes-panel">
         <h3>Current notes</h3>
         <p>{dataset.source_notes}</p>
+      </section>
+
+      <section className="dataset-detail-section">
+        <h3>How to use this dataset now</h3>
+        <div className="dataset-guidance-grid">
+          <div>
+            <p className="dataset-guidance-label">Available access</p>
+            <ul className="dataset-guidance-list">
+              {getAccessNotes(dataset).map((note) => (
+                <li key={note}>{note}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <p className="dataset-guidance-label">Current state</p>
+            <ul className="dataset-guidance-list">
+              <li>
+                Storage status: {dataset.storage_status.replaceAll('_', ' ')}
+              </li>
+              <li>
+                Ingestion status: {dataset.ingestion_status.replaceAll('_', ' ')}
+              </li>
+              <li>
+                Analysis ready: {dataset.analysis_ready ? 'yes' : 'not yet'}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="dataset-detail-section">
+        <h3>Starter analysis snippets</h3>
+        <p className="dataset-guidance-copy">
+          These examples are intentionally simple. They are meant to show the
+          easiest local path into the dataset before hosted notebooks exist.
+        </p>
+
+        <div className="dataset-code-grid">
+          <div className="dataset-code-panel">
+            <p className="dataset-guidance-label">Python / pandas</p>
+            <pre className="dataset-code-block">
+              <code>{getPythonSnippet(dataset)}</code>
+            </pre>
+          </div>
+
+          <div className="dataset-code-panel">
+            <p className="dataset-guidance-label">SQL</p>
+            <pre className="dataset-code-block">
+              <code>{getSqlSnippet(dataset)}</code>
+            </pre>
+          </div>
+        </div>
+      </section>
+
+      <section className="dataset-detail-section">
+        <h3>Future connections</h3>
+        <p className="dataset-guidance-copy">
+          This page is prepared for future notebook links, chart outputs, and
+          related article references. For now, the goal is to make the dataset
+          understandable and usable before the hosted research workflow exists.
+        </p>
       </section>
 
       <section className="dataset-links-panel">
