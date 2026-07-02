@@ -1,0 +1,43 @@
+catalog_version: 1
+source_family: Open Data DK / Kobenhavns Kommune starter library
+datasets:
+  - dataset_key: cph_traffic
+    slug: cph-traffic
+    priority: active_now
+    ingestion_status: transformed
+  - dataset_key: cph_bicycle_data
+    slug: cph-bicycle-data
+    priority: next_up
+    ingestion_status: transformed
+  - dataset_key: cph_parking_counts
+    slug: cph-parking-counts
+    priority: next_up
+    ingestion_status: transformed
+  - dataset_key: cph_parkomat_transactions
+    slug: cph-parkomat-transactions
+    priority: planned_later
+    ingestion_status: ingest_planned
+  - dataset_key: cph_airview
+    slug: cph-airview
+    priority: next_up
+    ingestion_status: transformed
+  - dataset_key: cph_air_pollution
+    slug: cph-air-pollution
+    priority: planned_later
+    ingestion_status: ingest_planned
+  - dataset_key: cph_meteorology
+    slug: cph-meteorology
+    priority: planned_later
+    ingestion_status: ingest_planned
+  - dataset_key: cph_tree_base
+    slug: cph-tree-base
+    priority: next_up
+    ingestion_status: transformed
+  - dataset_key: cph_water_quality
+    slug: cph-water-quality
+    priority: catalog_only
+    ingestion_status: registered
+  - dataset_key: cph_districts
+    slug: cph-districts
+    priority: support_dataset
+    ingestion_status: registered

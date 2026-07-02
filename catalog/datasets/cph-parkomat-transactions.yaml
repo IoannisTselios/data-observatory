@@ -1,0 +1,21 @@
+dataset_key: cph_parkomat_transactions
+slug: cph-parkomat-transactions
+title: Copenhagen Parking Meter Transactions
+short_description: Parking meter transaction data for Copenhagen in a simple CSV-friendly format.
+topic: mobility
+geography: Copenhagen, Denmark
+source_name: Kobenhavns Kommune via Open Data DK
+source_url: https://admin.opendata.dk/dataset/parkomat-transaktioner
+source_type: ckan
+license: unknown
+update_frequency: unknown
+storage_status: external_only
+ingestion_status: ingest_planned
+raw_table_name: null
+staging_model_name: null
+mart_model_name: null
+analysis_ready: false
+published: false
+source_notes: >
+  Good example of a more transactional city dataset that could later support
+  simple time-series or demand analysis.

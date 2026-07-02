@@ -6,3 +6,11 @@ sources:
     tables:
       - name: ckan_cph_raw
         description: "Raw Copenhagen traffic counts from CKAN API"
+      - name: cph_bicycle_data_raw
+        description: "Raw Copenhagen bicycle data loaded from Open Data DK CSV resources"
+      - name: cph_parking_counts_raw
+        description: "Raw Copenhagen parking counts loaded from Open Data DK CSV resources"
+      - name: cph_airview_raw
+        description: "Raw Copenhagen Air View data loaded from Open Data DK GeoJSON resources"
+      - name: cph_tree_base_raw
+        description: "Raw Copenhagen municipal tree base data loaded from Open Data DK CSV resources"

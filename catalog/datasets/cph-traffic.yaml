@@ -1,0 +1,21 @@
+dataset_key: cph_traffic
+slug: cph-traffic
+title: Copenhagen Traffic Counts
+short_description: Street-level traffic observations with cyclist and vehicle indicators for Copenhagen.
+topic: mobility
+geography: Copenhagen, Denmark
+source_name: Kobenhavns Kommune via Open Data DK
+source_url: https://admin.opendata.dk/dataset/trafiktal
+source_type: ckan
+license: unknown
+update_frequency: unknown
+storage_status: stored_internal
+ingestion_status: transformed
+raw_table_name: raw.ckan_cph_raw
+staging_model_name: stg_cph_traffic
+mart_model_name: analytics.cph_traffic
+analysis_ready: true
+published: false
+source_notes: >
+  Raw ingest currently comes from the CKAN datastore API and lands in Postgres
+  before dbt standardizes the table for analysis.

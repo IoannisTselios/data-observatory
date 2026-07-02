@@ -1,0 +1,21 @@
+dataset_key: cph_air_pollution
+slug: cph-air-pollution
+title: Copenhagen Air Pollution
+short_description: Air pollution data for Copenhagen available as simple downloadable resources.
+topic: environment
+geography: Copenhagen, Denmark
+source_name: Kobenhavns Kommune via Open Data DK
+source_url: https://admin.opendata.dk/dataset/luftforurening
+source_type: ckan
+license: unknown
+update_frequency: unknown
+storage_status: external_only
+ingestion_status: ingest_planned
+raw_table_name: null
+staging_model_name: null
+mart_model_name: null
+analysis_ready: false
+published: false
+source_notes: >
+  Useful candidate for simple environmental analysis and a good complement to
+  traffic-related datasets later in the pipeline.

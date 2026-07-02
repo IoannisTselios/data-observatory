@@ -1,0 +1,21 @@
+dataset_key: cph_districts
+slug: cph-districts
+title: Copenhagen Districts
+short_description: District boundary reference data for Copenhagen in tabular and geospatial formats.
+topic: geography
+geography: Copenhagen, Denmark
+source_name: Kobenhavns Kommune via Open Data DK
+source_url: https://admin.opendata.dk/dataset/bydele
+source_type: ckan
+license: unknown
+update_frequency: unknown
+storage_status: external_only
+ingestion_status: registered
+raw_table_name: null
+staging_model_name: null
+mart_model_name: null
+analysis_ready: false
+published: false
+source_notes: >
+  Useful reference dataset for maps, joins, and future district-level stories
+  across many other Copenhagen datasets.

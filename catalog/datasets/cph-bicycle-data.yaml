@@ -1,0 +1,21 @@
+dataset_key: cph_bicycle_data
+slug: cph-bicycle-data
+title: Copenhagen Bicycle Data
+short_description: Bicycle-related counts and infrastructure data for Copenhagen in tabular and geospatial formats.
+topic: mobility
+geography: Copenhagen, Denmark
+source_name: Kobenhavns Kommune via Open Data DK
+source_url: https://admin.opendata.dk/dataset/cykeldata
+source_type: ckan
+license: unknown
+update_frequency: unknown
+storage_status: stored_internal
+ingestion_status: transformed
+raw_table_name: raw.cph_bicycle_data_raw
+staging_model_name: stg_cph_bicycle_data
+mart_model_name: analytics.cph_bicycle_data
+analysis_ready: false
+published: false
+source_notes: >
+  Ingested from the Open Data DK CSV resource and prepared in dbt as a first
+  follow-up mobility dataset after the traffic example.

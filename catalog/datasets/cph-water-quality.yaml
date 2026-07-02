@@ -1,0 +1,22 @@
+dataset_key: cph_water_quality
+slug: cph-water-quality
+title: Copenhagen Water Consumption and Water Quality
+short_description: Water use and water quality data for Copenhagen in downloadable tabular formats.
+topic: environment
+geography: Copenhagen, Denmark
+source_name: Kobenhavns Kommune via Open Data DK
+source_url: https://admin.opendata.dk/dataset/vandforbrug-og-vandkvalitet
+source_type: ckan
+license: unknown
+update_frequency: unknown
+storage_status: external_only
+ingestion_status: registered
+raw_table_name: null
+staging_model_name: null
+mart_model_name: null
+analysis_ready: false
+published: false
+source_notes: >
+  Good non-traffic public-interest dataset for showing that the observatory
+  library is broader than urban mobility alone.
+

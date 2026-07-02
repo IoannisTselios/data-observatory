@@ -1,46 +1,68 @@
-.PHONY: up down status psql fresh analyze logs
+.PHONY: up down status psql fresh analyze logs reset frontend frontend-build api-test check validate-catalog
 
-# Start full stack
+PYTHON ?= ./venv/bin/python
+DBT ?= ./venv/bin/dbt
+
 up:
 	docker compose up -d --build
 	sleep 15
 
-# Status check
+down:
+	docker compose down
+
 status:
 	docker compose ps
 	@echo "\n🌐 URLs:"
 	@echo "FastAPI: http://localhost:8000/docs"
 	@echo "pgAdmin: http://localhost:5050"
-	@echo "Jupyter: $$(docker compose logs jupyter 2>&1 | grep token | tail -1)"
 	@echo "Postgres: localhost:5432"
 
-# Fresh data pipeline
+frontend:
+	cd data-observatory-frontend && npm run dev
+
+frontend-build:
+	cd data-observatory-frontend && npm run build
+
+api-test:
+	curl -s localhost:8000/api/traffic/summary | head
+
+check:
+	make status
+	@echo "\n🔎 FastAPI docs:"
+	@curl -I http://localhost:8000/docs || true
+	@echo "\n🔎 Traffic endpoint:"
+	@curl -s localhost:8000/api/traffic/summary | head || true
+
+validate-catalog:
+	$(PYTHON) catalog/validate_catalog.py
+
 fresh:
 	make ingest
 	make dbt
 	curl -s localhost:8000/api/traffic/summary | jq '.[0]'
 
-# Data ingestion
 ingest:
-	python ingest_ckan.py
+	$(PYTHON) pipelines/ingest_ckan_cph.py
 
-# dbt pipeline
+ingest-next4:
+	$(PYTHON) -m pipelines.ingestion.cph_bicycle_data
+	$(PYTHON) -m pipelines.ingestion.cph_parking_counts
+	$(PYTHON) -m pipelines.ingestion.cph_airview
+	$(PYTHON) -m pipelines.ingestion.cph_tree_base
+
+.PHONY: dbt
 dbt:
-	dbt run
+	$(DBT) run --project-dir dbt/observatory
 
-# psql
 psql:
 	docker exec -it $$(docker ps -qf name=postgres) psql -U postgres -d observatory
 
-# Jupyter analysis starter
 analyze:
 	docker compose exec jupyter bash -c "pip install plotly pandas && echo '✅ Analysis env ready'"
 
-# Logs
 logs:
 	docker compose logs -f fastapi
 
-# Clean restart
 reset:
 	make down
 	docker volume rm data-observatory_postgres_data || true

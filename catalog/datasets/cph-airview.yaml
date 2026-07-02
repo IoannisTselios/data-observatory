@@ -1,0 +1,21 @@
+dataset_key: cph_airview
+slug: cph-airview
+title: Copenhagen Air View
+short_description: Environmental air-quality related data for Copenhagen with geospatial and JSON resources.
+topic: environment
+geography: Copenhagen, Denmark
+source_name: Kobenhavns Kommune via Open Data DK
+source_url: https://admin.opendata.dk/dataset/airview
+source_type: ckan
+license: unknown
+update_frequency: unknown
+storage_status: stored_internal
+ingestion_status: transformed
+raw_table_name: raw.cph_airview_raw
+staging_model_name: stg_cph_airview
+mart_model_name: analytics.cph_airview
+analysis_ready: false
+published: false
+source_notes: >
+  Ingested from the Open Data DK GeoJSON resource and prepared in dbt as a
+  geo-oriented environmental dataset for future urban air-quality analysis.
